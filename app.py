@@ -58,7 +58,10 @@ DB_CONNECTION_STRING = (
     'PWD=UsaMasters@2020;'
 )
 
-UPLOAD_FOLDER = 'uploads'
+# UPLOAD_FOLDER = 'uploads'
+# os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+# app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+UPLOAD_FOLDER = '/home/site/wwwroot/uploads'  # Change the folder path for Azure
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -360,4 +363,4 @@ def brand_preferences():
     return fig.to_html()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
