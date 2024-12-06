@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        select, input[type="file"] {
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        button[type="submit"], button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        button[type="submit"]:hover, button:hover {
+            background-color: #0056b3;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        ul {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        ul li.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Dataset</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="table_name">Table Name:</label>
+            <select id="table_name" name="table_name" required>
+                <option value="Households">Households</option>
+                <option value="Transactions">Transactions</option>
+                <option value="Products">Products</option>
+            </select>
+            <br><br>
+            <label for="file">Select CSV File:</label>
+            <input type="file" id="file" name="file" required>
+            <br><br>
+            <button type="submit">Upload</button>
+        </form>
+
+        <div class="button-container">
+            <button onclick="window.location.href = '/dashboard';">Go to Home Page</button>
+        </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
