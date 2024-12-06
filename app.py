@@ -49,7 +49,7 @@ def logout():
 #     app.run(debug=True)
 
 
-Database connection details
+# Database connection details
 DB_CONNECTION_STRING = (
     'Driver={ODBC Driver 17 for SQL Server};'
     'Server=cloudproject19.database.windows.net;'
