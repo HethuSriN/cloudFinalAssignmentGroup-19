@@ -1,6 +1,12 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+import pyodbc  # type: ignore
+import pandas as pd
+import os
+import plotly.express as px
+import plotly.graph_objects as go
 
 app = Flask(__name__)
+app.secret_key = 'supersecretkey'
 
 # @app.route('/')
 # def home():
@@ -32,7 +38,7 @@ def submit():
 
     # Check if the details are correct
     if username == valid_username and password == valid_password and email == valid_email:
-        return redirect(url_for('index'))  # Redirect to dashboard page if credentials are correct
+        return redirect(url_for('dashboard'))  # Redirect to dashboard page if credentials are correct
     else:
         return render_template('index.html', error_message="Invalid credentials, please try again.")
 
