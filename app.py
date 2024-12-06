@@ -303,9 +303,9 @@ def logout():
 # # Merge datasets for analysis
 # #merged = transactions.merge(products, on='PRODUCT_NUM', how='left').merge(households, on='HSHD_NUM', how='left')
 
-# @app.route('/dashboard')
-# def dashboard():
-#     return render_template('dashboard.html')
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
 
 # @app.route('/demographics')
 # def demographics():
