@@ -1,6 +1,6 @@
 runtime: python:3.9 # Ensure the runtime version matches the Python version your app requires
 
-app_name: your-app-name # Replace with your app's name
+app_name: app # Replace with your app's name
 
 # Command to run your app
 entrypoint: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app:app
