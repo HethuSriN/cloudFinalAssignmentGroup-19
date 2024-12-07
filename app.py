@@ -288,9 +288,9 @@ def basket_analysis_ml():
 #         return f"An error occurred: {e}"
 
 # Load datasets
-households = pd.read_csv('400_households.csv')
-transactions = pd.read_csv('400_transactions.csv')
-products = pd.read_csv('400_products.csv')
+households = pd.read_csv('https://cloudproject19.blob.core.windows.net/households/400_households.csv')
+transactions = pd.read_csv('https://cloudproject19.blob.core.windows.net/transactions/400_transactions.csv')
+products = pd.read_csv('https://cloudproject19.blob.core.windows.net/products/400_products.csv')
 
 # Standardize column names
 transactions.columns = transactions.columns.str.strip().str.lower()
