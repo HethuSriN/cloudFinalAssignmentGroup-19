@@ -8,17 +8,6 @@ import plotly.graph_objects as go
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
-# @app.route('/')
-# def home():
-#     return render_template('index.html')
-
-# @app.route('/submit', methods=['POST'])
-# def submit():
-#     username = request.form.get('username')
-#     password = request.form.get('password')
-#     email = request.form.get('email')
-#     return f"Welcome {username}, your data has been submitted!"
-
 # Sample credentials (in a real scenario, these should be securely stored and checked)
 valid_username = "admin"
 valid_password = "password123"
