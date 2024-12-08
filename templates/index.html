@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Webpage</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,7 +24,7 @@
 
         h1 {
             text-align: center;
-            color: #007bff;
+            background-color: #20b2aa; /* Light Sea Green */
         }
 
         label {
@@ -46,7 +46,7 @@
         input[type="submit"] {
             width: 100%;
             padding: 14px;
-            background-color: #007bff;
+            background-color: #20b2aa; /* Light Sea Green */
             color: white;
             border: none;
             border-radius: 4px;
@@ -55,7 +55,7 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #178f85; /* Slightly darker green */
         }
 
         .error-message {
@@ -68,7 +68,7 @@
 <body>
 
     <div class="container">
-        <h1>Welcome to the Interactive Webpage</h1>
+        <h1>Login Page</h1>
         <form action="/submit" method="POST">
             <label for="username">Username:</label><br>
             <input type="text" id="username" name="username" required><br>
@@ -78,7 +78,7 @@
             
             <label for="email">Email:</label><br>
             <input type="email" id="email" name="email" required><br>
-            
+            <p><strong>Hint:</strong> Default Username: <em>Admin</em> | Default Password: <em>Cloud2024</em>| Default Email: <em>admin@email.com</em></p>
             <input type="submit" value="Submit">
         </form>
     </div>

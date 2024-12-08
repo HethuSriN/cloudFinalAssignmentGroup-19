@@ -9,9 +9,9 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'
 
 # Sample credentials (in a real scenario, these should be securely stored and checked)
-valid_username = "admin"
-valid_password = "password123"
-valid_email = "admin@example.com"
+valid_username = "Admin"
+valid_password = "Cloud2024"
+valid_email = "admin@email.com"
 
 @app.route('/')
 def index():
