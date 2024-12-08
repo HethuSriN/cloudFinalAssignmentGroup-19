@@ -125,25 +125,26 @@ def upload():
                 households_file = request.files['households_file']
                 households_df = pd.read_csv(households_file)
 
-                # Normalize column names to lowercase
+                # Normalize column names
                 households_df.columns = households_df.columns.str.strip().str.lower()
 
-                # Verify required columns exist
-                required_columns = [
-                    'hshd_num', 'loyalty_flag', 'age_range', 'marital_status',
-                    'income_range', 'homeowner_flag', 'household_composition', 'hh_size', 'children'
-                ]
-                if not set(required_columns).issubset(households_df.columns):
-                    return "Missing required columns in Households.csv."
+                # Clean numeric columns (e.g., 'hh_size', 'children')
+                households_df['hh_size'] = pd.to_numeric(households_df['hh_size'], errors='coerce')
+                households_df['children'] = pd.to_numeric(households_df['children'], errors='coerce')
+
+                # Check for missing or invalid values
+                if households_df[['hh_size', 'children']].isnull().any().any():
+                    return "Invalid numeric values in Households.csv. Please check your data."
 
                 for _, row in households_df.iterrows():
                     cursor.execute(
                         """
-                        INSERT INTO Households (Hshd_num, Loyalty_flag, Age_range, Marital_status, Income_range, Homeowner_flag, Household_composition, HH_size, Children)
+                        INSERT INTO Households (Hshd_num, Loyalty_flag, Age_range, Marital_status, Income_range,
+                                                Homeowner_flag, Household_composition, HH_size, Children)
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                         """,
-                        row['hshd_num'], row['loyalty_flag'], row['age_range'], row['marital_status'],
-                        row['income_range'], row['homeowner_flag'], row['household_composition'], row['hh_size'], row['children']
+                        row['hshd_num'], row['l'], row['age_range'], row['marital'],
+                        row['income_range'], row['homeowner'], row['hshd_composition'], row['hh_size'], row['children']
                     )
 
             # Process Transactions.csv
@@ -156,7 +157,7 @@ def upload():
 
                 # Verify required columns exist
                 required_columns = [
-                    'hshd_num', 'basket_num', 'date', 'product_num', 'spend', 'units', 'region'
+                    'basket_num', 'hshd_num', 'purchase_', 'product_num', 'spend', 'units', 'store_r','week_num','year'
                 ]
                 if not set(required_columns).issubset(transactions_df.columns):
                     return "Missing required columns in Transactions.csv."
@@ -164,11 +165,11 @@ def upload():
                 for _, row in transactions_df.iterrows():
                     cursor.execute(
                         """
-                        INSERT INTO Transactions (Hshd_num, Basket_num, Date, Product_num, Spend, Units, Region)
-                        VALUES (?, ?, ?, ?, ?, ?, ?)
+                        INSERT INTO Transactions (Basket_num, Hshd_num, Date, Product_num, Spend, Units, Store_region, Week_num, Year)
+                        VALUES (?, ?, ?, ?, ?, ?, ?,?,?)
                         """,
-                        row['hshd_num'], row['basket_num'], row['date'], row['product_num'],
-                        row['spend'], row['units'], row['region']
+                        row['basket_num'], row['hshd_num'],row['purchase_'], row['product_num'],
+                        row['spend'], row['units'], row['store_r'],row['week_num'], row['year']
                     )
 
             # Process Products.csv
@@ -181,7 +182,7 @@ def upload():
 
                 # Verify required columns exist
                 required_columns = [
-                    'product_num', 'department', 'commodity', 'brand_type', 'natural_organic'
+                    'product_num', 'department', 'commodity', 'brand_ty', 'natural_organic_flag'
                 ]
                 if not set(required_columns).issubset(products_df.columns):
                     return "Missing required columns in Products.csv."
@@ -189,10 +190,10 @@ def upload():
                 for _, row in products_df.iterrows():
                     cursor.execute(
                         """
-                        INSERT INTO Products (Product_num, Department, Commodity, Brand_Type, Natural_Organic)
+                        INSERT INTO Products (Product_num, Department, Commodity, Brand_type, Natural_organic_flag)
                         VALUES (?, ?, ?, ?, ?)
                         """,
-                        row['product_num'], row['department'], row['commodity'], row['brand_type'], row['natural_organic']
+                        row['product_num'], row['department'], row['commodity'], row['brand_ty'], row['natural_organic_flag']
                     )
 
             # Commit changes and close connection
