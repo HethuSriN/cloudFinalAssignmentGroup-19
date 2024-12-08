@@ -75,6 +75,37 @@ def load_data_to_db(table_name, data):
     except Exception as e:
         return str(e)
 
+# Function to fetch data for HH #10
+def get_sample_data(hshd_num='10'):
+    conn = pyodbc.connect(DB_CONNECTION_STRING)
+    cursor = conn.cursor()
+    # SQL Query
+    query = """
+    SELECT 
+        h.Hshd_num, h.Loyalty_flag, h.Age_range, h.Marital_status, 
+        h.Income_range, h.Homeowner_flag, h.Household_composition, 
+        h.HH_size, h.Children, 
+        t.Basket_num, t.Date, t.Product_num, t.Spend, t.Units, t.Store_region, t.Week_num, t.Year, 
+        p.Department, p.Commodity, p.Brand_type, p.Natural_organic_flag
+    FROM Households h
+    JOIN Transactions t ON h.Hshd_num = t.Hshd_num
+    JOIN Products p ON t.Product_num = p.Product_num
+    WHERE h.Hshd_num = ?
+    ORDER BY t.Basket_num, t.Date, t.Product_num;
+    """
+
+    cursor.execute(query, (hshd_num,))
+    data = cursor.fetchall()
+    conn.close()
+
+    return data
+
+@app.route('/sample_data')
+def sample_data():
+    # Fetch data for HH #10
+    data = get_sample_data('10')
+    return render_template('sample_data.html', data=data)
+
 # Interactive Web Page: Search for Data Pulls
 @app.route('/search', methods=['GET', 'POST'])
 def search_data():

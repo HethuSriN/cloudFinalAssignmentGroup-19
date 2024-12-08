@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Data Pull for HH #10</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f9f9;
+            color: #333;
+        }
+
+        .header {
+            text-align: center;
+            /* background-color: #7a3b92;  */
+            color: #7a3b92;
+            padding: 20px 0;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .header p {
+            font-size: 14px;
+            margin: 5px 0 0;
+        }
+
+        .button-container {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+        }
+
+        .button-container .home-button {
+            background-color: #20b2aa; /* Light Sea Green */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+        }
+
+        .button-container .home-button:hover {
+            background-color: #178f85; /* Slightly darker green */
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 18px;
+            color: #7a3b92;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+
+        table th, table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #20b2aa; /* Light Sea Green */
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        @media screen and (max-width: 768px) {
+            table th, table td {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .header p {
+                font-size: 12px;
+            }
+
+            .title {
+                font-size: 14px;
+            }
+
+            .button-container {
+                left: 10px;
+            }
+
+            .button-container .home-button {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="button-container">
+        <a href="/dashboard" class="home-button">Home</a>
+    </div>
+    <h1>Sample Data Pull for HH #10</h1>
+    <p>Linking the Household, Transaction, and Products Tables</p>
+    <p>Sorted by Hshd_num, Basket_num, Date, Product_num, Department, Commodity</p>
+</div>
+
+<div class="content">
+    <!-- Sample Data Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Hshd_num</th>
+                <th>Loyalty_flag</th>
+                <th>Age_range</th>
+                <th>Marital_status</th>
+                <th>Income_range</th>
+                <th>Homeowner_flag</th>
+                <th>Household_composition</th>
+                <th>HH_size</th>
+                <th>Children</th>
+                <th>Basket_num</th>
+                <th>Date</th>
+                <th>Product_num</th>
+                <th>Spend</th>
+                <th>Units</th>
+                <th>Store_region</th>
+                <th>Week_num</th>
+                <th>Year</th>
+                <th>Department</th>
+                <th>Commodity</th>
+                <th>Brand_type</th>
+                <th>Natural_organic_flag</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row.Hshd_num }}</td>
+                <td>{{ row.Loyalty_flag }}</td>
+                <td>{{ row.Age_range }}</td>
+                <td>{{ row.Marital_status }}</td>
+                <td>{{ row.Income_range }}</td>
+                <td>{{ row.Homeowner_flag }}</td>
+                <td>{{ row.Household_composition }}</td>
+                <td>{{ row.HH_size }}</td>
+                <td>{{ row.Children }}</td>
+                <td>{{ row.Basket_num }}</td>
+                <td>{{ row.Date }}</td>
+                <td>{{ row.Product_num }}</td>
+                <td>{{ row.Spend }}</td>
+                <td>{{ row.Units }}</td>
+                <td>{{ row.Store_region }}</td>
+                <td>{{ row.Week_num }}</td>
+                <td>{{ row.Year }}</td>
+                <td>{{ row.Department }}</td>
+                <td>{{ row.Commodity }}</td>
+                <td>{{ row.Brand_type }}</td>
+                <td>{{ row.Natural_organic_flag }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
