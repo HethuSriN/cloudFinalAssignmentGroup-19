@@ -90,18 +90,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>Upload Dataset</h1>
+        <h1>Upload Datasets</h1>
         <form method="POST" enctype="multipart/form-data">
-            <label for="table_name">Table Name:</label>
-            <select id="table_name" name="table_name" required>
-                <option value="Households">Households</option>
-                <option value="Transactions">Transactions</option>
-                <option value="Products">Products</option>
-            </select>
-            <br><br>
-            <label for="file">Select CSV File:</label>
-            <input type="file" id="file" name="file" required>
-            <br><br>
+            <label for="households_file">Households CSV File:</label>
+            <input type="file" id="households_file" name="households_file" required>
+            
+            <label for="transactions_file">Transactions CSV File:</label>
+            <input type="file" id="transactions_file" name="transactions_file" required>
+            
+            <label for="products_file">Products CSV File:</label>
+            <input type="file" id="products_file" name="products_file" required>
+            
+            <br>
             <button type="submit">Upload</button>
         </form>
 
